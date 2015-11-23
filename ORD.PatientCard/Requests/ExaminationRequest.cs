@@ -8,21 +8,8 @@ namespace ORD.PatientCard.Requests
 {
     public class ExaminationRequest : Request
     {
-        private int id;
         private string mSpecialistType;
         private string mDescription;
-
-        public ExaminationRequest(string type, string description)
-        {
-            this.mDescription = description;
-            this.mSpecialistType = type;
-        }
-
-        public int Id
-        {
-            get { return this.id; }
-            set { this.id = value; }
-        }
 
         public string Type
         {

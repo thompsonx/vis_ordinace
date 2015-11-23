@@ -14,10 +14,10 @@ namespace ORD.PatientCard.Examinations
         private ExaminationType mType;
         private char paid;
 
-        public static const char FEE_PAID = '1';
-        public static const char FEE_UNPAID = '0';
-        public static const char FEE_TO_BE_PAID = 'T';
-        public static const char FEE_ABSOLUTION = 'A';
+        public const char FEE_PAID = '1';
+        public const char FEE_UNPAID = '0';
+        public const char FEE_TO_BE_PAID = 'T';
+        public const char FEE_ABSOLUTION = 'A';
 
         public const int LEN_DIAGNOSIS = 200;
         public const int LEN_FEE = 1;

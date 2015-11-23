@@ -43,13 +43,24 @@
     <Compile Include="Examinations\ExaminationPrice.cs" />
     <Compile Include="Examinations\ExaminationType.cs" />
     <Compile Include="Patient.cs" />
+    <Compile Include="PatientMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\ExaminationRequest.cs" />
+    <Compile Include="Requests\ExaminationRequestMapper.cs" />
     <Compile Include="Requests\Prescription.cs" />
     <Compile Include="Requests\Request.cs" />
+    <Compile Include="Requests\RequestMapper.cs" />
     <Compile Include="Requests\SampleRequest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ORD.Database.Mappers\ORD.Database.Mappers.csproj">
+      <Project>{21e94499-2004-4d1d-8110-3c578afe8924}</Project>
+      <Name>ORD.Database.Mappers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ORD.Database\ORD.Database.csproj">
+      <Project>{10b538f6-2685-405c-af22-7d0536f089a5}</Project>
+      <Name>ORD.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ORD.HealthInsurances\ORD.HealthInsurances.csproj">
       <Project>{262eb880-8e9d-4e56-9fdd-260ad896841f}</Project>
       <Name>ORD.HealthInsurances</Name>
@@ -57,6 +68,10 @@
     <ProjectReference Include="..\ORD.Medicines\ORD.Medicines.csproj">
       <Project>{43cc7c41-f066-44c0-b675-18ca10e3a1b9}</Project>
       <Name>ORD.Medicines</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ORD.Strings\ORD.Strings.csproj">
+      <Project>{47608081-2640-405a-9995-14a7367e2ac8}</Project>
+      <Name>ORD.Strings</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

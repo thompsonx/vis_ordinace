@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ORD.Strings;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -21,7 +22,14 @@ namespace ORD.Database
             if (mConnection.State != System.Data.ConnectionState.Open)
             {
                 mConnection.ConnectionString = conString;
-                mConnection.Open();
+                try
+                {
+                    mConnection.Open();
+                }
+                catch (Exception e)
+                {
+                    throw new ApplicationException(ErrorMessages.DB_conn + " : " + e.Message);
+                }
             }
             return true;
         }
@@ -40,7 +48,14 @@ namespace ORD.Database
 
         public void Close()
         {
-            mConnection.Close();
+            try
+            {
+                mConnection.Close();
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(ErrorMessages.DB_close + " : " + e.Message);
+            }
         }
 
         public void BeginTransaction()
@@ -87,6 +102,8 @@ namespace ORD.Database
         }
 
         public abstract string ProcedureWithMessage(System.Data.Common.DbCommand command);
+
+        public abstract DbParameter CreateParameter(string name, string type, int length = 0);
 
         public string Language
         {

@@ -1,4 +1,5 @@
 ﻿using ORD.HealthInsurances;
+using ORD.PatientCard.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,12 @@ namespace ORD.PatientCard
         private int mZipCode;
         private int mPhoneNumber;
 
-        public const int LEN_ID = 10;
-        public const int LEN_SURNAME = 30;
-        public const int LEN_NAME = 30;
-        public const int LEN_STREET = 50;
-        public const int LEN_TOWN = 50;
+        private List<Request> requests;
+
+        public Patient()
+        {
+            this.requests = new List<Request>();
+        }
 
         public string ID
         {
@@ -70,6 +72,12 @@ namespace ORD.PatientCard
         {
             get { return this.mPhoneNumber; }
             set { this.mPhoneNumber = value; }
+        }
+
+        public List<Request> Requests 
+        {
+            get { return this.requests; }
+            set { this.requests = value; }
         }
     }
 }

@@ -44,6 +44,12 @@
     <Compile Include="MSSqlDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ORD.Strings\ORD.Strings.csproj">
+      <Project>{47608081-2640-405a-9995-14a7367e2ac8}</Project>
+      <Name>ORD.Strings</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

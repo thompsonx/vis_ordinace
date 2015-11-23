@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ORD.Strings;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -64,6 +66,28 @@ namespace ORD.Database
         private void CatchMessage(object sender, SqlInfoMessageEventArgs e)
         {
             this.message += e.Message + Environment.NewLine;
+        }
+
+        public override DbParameter CreateParameter(string name, string type, int length = 0)
+        {
+            SqlDbType datatype;
+            switch (type)
+            {
+                case "char":
+                    datatype = SqlDbType.Char;
+                    return new SqlParameter(name, datatype, length);
+                case "varchar":
+                    datatype = SqlDbType.VarChar;
+                    return new SqlParameter(name, datatype, length);
+                case "int":
+                    datatype = SqlDbType.Int;
+                    return new SqlParameter(name, datatype);
+                case "datetime":
+                    datatype = SqlDbType.DateTime;
+                    return new SqlParameter(name, datatype);
+                default:
+                    throw new ApplicationException(ErrorMessages.DB_param);
+            }
         }
     }
 }

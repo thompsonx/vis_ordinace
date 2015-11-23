@@ -56,6 +56,8 @@ namespace ORD.Database
 
         string ProcedureWithMessage(DbCommand command);
 
+        DbParameter CreateParameter(string name, string type, int length = 0);
+
         String Language
         {
             get;
