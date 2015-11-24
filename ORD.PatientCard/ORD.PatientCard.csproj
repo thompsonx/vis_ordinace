@@ -48,6 +48,7 @@
     <Compile Include="Requests\ExaminationRequest.cs" />
     <Compile Include="Requests\ExaminationRequestMapper.cs" />
     <Compile Include="Requests\Prescription.cs" />
+    <Compile Include="Requests\PrescriptionMapper.cs" />
     <Compile Include="Requests\Request.cs" />
     <Compile Include="Requests\RequestMapper.cs" />
     <Compile Include="Requests\SampleRequest.cs" />

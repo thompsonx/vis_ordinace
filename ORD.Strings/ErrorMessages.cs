@@ -13,5 +13,6 @@ namespace ORD.Strings
         public const string DB_param = "Unknown DB datatype";
 
         public const string REQ_type = "Unknown type (descendant) of Request";
+        public const string REQ_P_medicines = "No medicines! Cannot insert empty prescription!";
     }
 }
