@@ -52,6 +52,12 @@ namespace ORD.Medicines
             set { this.mAllergens = value; }
         }
 
+        public int PackageSize
+        {
+            get { return this.PackageSize; }
+            set { this.PackageSize = value; }
+        }
+
         public float Price 
         {
             get { return this.mPrice; }

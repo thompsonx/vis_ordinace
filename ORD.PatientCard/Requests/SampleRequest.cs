@@ -11,12 +11,11 @@ namespace ORD.PatientCard.Requests
         private string mType;
         private string mDescription;
         private string results;
+        private DateTime mProcessedDate;
 
-        public SampleRequest(string type, string description)
+        public SampleRequest()
         {
             this.results = null;
-            this.mDescription = description;
-            this.mType = type;
         }
 
         public string Type
@@ -35,6 +34,12 @@ namespace ORD.PatientCard.Requests
         {
             get { return this.results; }
             set { this.results = value; }
+        }
+
+        public DateTime ProcessedDate 
+        {
+            get { return this.mProcessedDate; }
+            set { this.mProcessedDate = value; }
         }
 
     }
