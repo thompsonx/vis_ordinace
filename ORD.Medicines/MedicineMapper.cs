@@ -10,7 +10,14 @@ namespace ORD.Medicines
 {
     public class MedicineMapper
     {
-        private static MedicineMapper mapper = new MedicineMapper();
+        private static MedicineMapper mapper = null;
+
+        public static MedicineMapper GetInstance()
+        {
+            if (mapper == null)
+                mapper = new MedicineMapper();
+            return mapper;
+        }
 
         private List<Medicine> medicines;
 
@@ -19,23 +26,23 @@ namespace ORD.Medicines
             this.medicines = new List<Medicine>();
         }
 
-        public void Add(Medicine m)
+        private void Add(Medicine m)
         {
             this.medicines.Add(m);
         }
 
-        public List<Medicine> MedicinesList 
+        public IList<Medicine> Medicines
         {
             get
             {
-                return this.medicines;
+                return this.medicines.AsReadOnly();
             }
-            private set; 
+            private set;
         }
 
-        public static void LoadMedicines()
+        public void LoadMedicines()
         {
-            if (mapper.MedicinesList.Count == 0)
+            if (this.Medicines.Count == 0)
                 return;
             try
             {
@@ -69,7 +76,7 @@ namespace ORD.Medicines
                     m.Allergens = allergens;
                     m.PackageSize = package;
                     m.Price = price;
-                    mapper.Add(m);
+                    this.Add(m);
                 }
             }
             catch (Exception e)
@@ -78,13 +85,10 @@ namespace ORD.Medicines
             }
         }
 
-        public static List<Medicine> Medicines 
+        public Medicine Find(int id)
         {
-            get
-            {
-                return mapper.MedicinesList;
-            } 
-            private set; 
+            this.LoadMedicines();
+            return this.medicines.Find(x => x.Id == id);
         }
     }
 }

@@ -134,7 +134,7 @@ namespace ORD.PatientCard.Requests
             db.Close();
         }
 
-        public List<Request> SelectRequests(string p_id, string type = null)
+        public List<Request> SelectRequests(string p_id)
         {
             IDatabase db = new MSSqlDatabase();
             db.Connect();
@@ -145,7 +145,7 @@ namespace ORD.PatientCard.Requests
 
             DbDataReader reader = db.Select(command);
 
-            List<Request> p = this.Read(reader);
+            List<Request> p = this.Read(reader, db);
 
             reader.Close();
             db.Close();
@@ -153,9 +153,11 @@ namespace ORD.PatientCard.Requests
             return p;
         }
 
-        private List<Request> Read(DbDataReader reader)
+        private List<Request> Read(DbDataReader reader, IDatabase db)
         {
             List<Request> requests = new List<Request>();
+            MedicineMapper medcat = MedicineMapper.GetInstance();
+            medcat.LoadMedicines();
 
             while (reader.Read())
             {
@@ -163,10 +165,33 @@ namespace ORD.PatientCard.Requests
                 er.Id = reader.GetInt32(0);
                 er.Created = reader.GetDateTime(1);
 
+                DbCommand command = db.CreateCommand(sqlSELECTMEDICINE);
+                command.Parameters.Add(db.CreateParameter("@id", "int"));
+                command.Parameters["@id"].Value = er.Id;
+                DbDataReader medicines = db.Select(command);
+                er.Medicines = this.ReadMedicines(medicines, medcat);
+
                 requests.Add(er);
             }
 
             return requests;
+        }
+
+        private List<Medicine> ReadMedicines(DbDataReader reader, MedicineMapper catalogue)
+        {
+            List<Medicine> medicines = new List<Medicine>();
+
+            while (reader.Read())
+            {
+                int id = reader.GetInt32(0);
+                Medicine m = catalogue.Find(id);
+                if (m == null)
+                    throw new ApplicationException(ErrorMessages.REQ_P_unknownm + id.ToString());
+
+                medicines.Add(m);
+            }
+
+            return medicines;
         }
     }
 }

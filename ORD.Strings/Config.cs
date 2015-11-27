@@ -10,5 +10,7 @@ namespace ORD.Strings
     {
         public const string XML_request = "samplerequests.xml";
         public const string XML_medicines = "medicines.xml";
+
+        public const string DB_connection = "server=localhost;database=VIS;user=vis;password=vis2015;";
     }
 }

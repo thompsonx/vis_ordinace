@@ -71,7 +71,7 @@ namespace ORD.PatientCard.Requests
             db.Close();
         }
 
-        public List<Request> SelectRequests(string p_id, string type = null)
+        public List<Request> SelectRequests(string p_id)
         {
             IDatabase db = new MSSqlDatabase();
             db.Connect();

@@ -13,15 +13,18 @@ namespace ORD.PatientCard.Requests
         {
             if (r is Prescription)
             {
-
+                PrescriptionMapper pm = new PrescriptionMapper();
+                pm.InsertRequest(p_id, r);
             }
             else if (r is ExaminationRequest)
             {
-
+                ExaminationRequestMapper erm = new ExaminationRequestMapper();
+                erm.InsertRequest(p_id, r);
             }
             else if (r is SampleRequest)
             {
-
+                SampleRequestMapper srm = new SampleRequestMapper();
+                srm.InsertRequest(p_id, r);
             }
             else
             {
@@ -33,15 +36,18 @@ namespace ORD.PatientCard.Requests
         {
             if (r is Prescription)
             {
-
+                PrescriptionMapper pm = new PrescriptionMapper();
+                pm.UpdateRequest(r);
             }
             else if (r is ExaminationRequest)
             {
-
+                ExaminationRequestMapper erm = new ExaminationRequestMapper();
+                erm.UpdateRequest(r);
             }
             else if (r is SampleRequest)
             {
-
+                SampleRequestMapper srm = new SampleRequestMapper();
+                srm.UpdateRequest(r);
             }
             else
             {
@@ -53,15 +59,18 @@ namespace ORD.PatientCard.Requests
         {
             if (r is Prescription)
             {
-
+                PrescriptionMapper pm = new PrescriptionMapper();
+                pm.DeleteRequest(r);
             }
             else if (r is ExaminationRequest)
             {
-
+                ExaminationRequestMapper erm = new ExaminationRequestMapper();
+                erm.DeleteRequest(r);
             }
             else if (r is SampleRequest)
             {
-
+                SampleRequestMapper srm = new SampleRequestMapper();
+                srm.DeleteRequest(r);
             }
             else
             {
@@ -74,13 +83,20 @@ namespace ORD.PatientCard.Requests
             switch (type)
             {
                 case null:
-                    return null;
+                    List<Request> pres = new PrescriptionMapper().SelectRequests(p_id);
+                    List<Request> exams = new ExaminationRequestMapper().SelectRequests(p_id);
+                    List<Request> samples = new SampleRequestMapper().SelectRequests(p_id);
+                    List<Request> all = new List<Request>();
+                    all.AddRange(pres);
+                    all.AddRange(exams);
+                    all.AddRange(samples);
+                    return all;
                 case "prescription":
-                    return null;
+                    return new PrescriptionMapper().SelectRequests(p_id);
                 case "samplerequest":
-                    return null;
+                    return new SampleRequestMapper().SelectRequests(p_id);
                 case "examinationrequest":
-                    return null;
+                    return new ExaminationRequestMapper().SelectRequests(p_id);
                 default:
                     throw new ApplicationException(ErrorMessages.REQ_type);
             }

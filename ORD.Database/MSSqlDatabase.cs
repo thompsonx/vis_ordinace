@@ -15,7 +15,7 @@ namespace ORD.Database
         public MSSqlDatabase()
         {
             this.mConnection = new SqlConnection();
-            this.CONNECTION_STRING = "server=localhost;database=VIS;user=vis;password=vis2015;";
+            this.CONNECTION_STRING = Config.DB_connection;
         }
 
         public override int ExecuteScalar(System.Data.Common.DbCommand command)

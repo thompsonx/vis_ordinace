@@ -1,5 +1,6 @@
 ﻿using ORD.Database;
 using ORD.Database.Mappers;
+using ORD.HealthInsurances;
 using ORD.PatientCard.Requests;
 using System;
 using System.Collections.Generic;
@@ -117,9 +118,8 @@ namespace ORD.PatientCard
                 p.ZipCode = reader.GetInt32(6);
                 p.PhoneNumber = reader.GetInt32(7);
 
-                //HealthInsurance hi = new HealthInsurance();
-                //hi.Code = reader.GetInt32(3);
-                //p.Insurance = hi;
+                HealthInsuranceMapper him = HealthInsuranceMapper.GetInstance();
+                p.Insurance = him.Find(reader.GetInt32(3));
 
                 patients.Add(p);
             }
@@ -133,23 +133,26 @@ namespace ORD.PatientCard
 
         public void InsertRequest(Patient p, Request r)
         {
-
+            RequestMapper mapper = new RequestMapper();
+            mapper.InsertRequest(p.ID, r);
         }
 
         public void UpdateRequest(Request r)
         {
-
+            RequestMapper mapper = new RequestMapper();
+            mapper.UpdateRequest(r);
         }
 
         public void DeleteRequest(Request r)
         {
-
+            RequestMapper mapper = new RequestMapper();
+            mapper.DeleteRequest(r);
         }
 
         public List<Request> SelectRequests(Patient p, string type = null)
         {
             //LAZY LOADING
-            return null;
+            return new RequestMapper().SelectRequests(p.ID, type);
         }
 
     }

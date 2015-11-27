@@ -17,6 +17,23 @@ namespace ORD.HealthInsurances
         private const string sqlDELETE = "DELETE FROM Health_insurance WHERE code = @code";
         private const string sqlSELECT = "SELECT * FROM Health_insurance ORDER BY code";
 
+        private static HealthInsuranceMapper insurance = null;
+
+        public static HealthInsuranceMapper GetInstance()
+        {
+            if (insurance == null)
+            {
+                insurance = new HealthInsuranceMapper();
+            }
+            return insurance;
+        }
+
+        private List<HealthInsurance> insurances = null;
+
+        private HealthInsuranceMapper() {
+
+        }
+
         public void Insert(HealthInsurance subject)
         {
             IDatabase db = new MSSqlDatabase();
@@ -80,6 +97,11 @@ namespace ORD.HealthInsurances
 
         public List<HealthInsurance> SelectAll()
         {
+            if (this.insurances != null)
+            {
+                return this.insurances;
+            }
+
             IDatabase db = new MSSqlDatabase();
             db.Connect();
 
@@ -87,12 +109,12 @@ namespace ORD.HealthInsurances
 
             DbDataReader reader = db.Select(command);
 
-            List<HealthInsurance> insurances = this.Read(reader);
+            this.insurances = this.Read(reader);
 
             reader.Close();
             db.Close();
 
-            return insurances;
+            return this.insurances;
         }
 
         private List<HealthInsurance> Read(DbDataReader reader)
@@ -114,6 +136,12 @@ namespace ORD.HealthInsurances
             }
 
             return insurances;
+        }
+
+        public HealthInsurance Find(int id)
+        {
+            this.SelectAll();
+            return this.insurances.Find(x => x.Code == id);
         }
     }
 }

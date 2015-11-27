@@ -23,5 +23,10 @@ namespace ORD.PatientCard.Requests
             get { return this.mMedicines; }
             set { this.mMedicines = value; }
         }
+
+        public void Add(Medicine m)
+        {
+            this.mMedicines.Add(m);
+        }
     }
 }
