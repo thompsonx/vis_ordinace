@@ -84,6 +84,8 @@ namespace ORD.PatientCard.Requests
 
             DbCommand command = db.CreateCommand(sqlUPDATE);
             PrepareCommand(db, command, er);
+            command.Parameters.Add(db.CreateParameter("@id", "int"));
+            command.Parameters["@id"].Value = er.Id;
             db.ExecuteNonQuery(command);
 
             this.DeleteMedicines(er);

@@ -10,16 +10,13 @@ namespace ORD.PatientCard.Requests
 {
     class ExaminationRequestMapper
     {
-        private static string sqlINSERT = "INSERT INTO ExaminationRequests VALUES (@id, @type, @description, @date)";
+        private static string sqlINSERT = "INSERT INTO ExaminationRequests VALUES (@type, @description, @date)";
         private static string sqlUPDATE = "UPDATE ExaminationRequests SET type = @type, description = @description, " +
             "date = @date WHERE id = @id";
         private static string sqlDELETE = "DELETE FROM ExaminationRequests WHERE id = @id";
         private static string sqlSELECT = "SELECT * FROM ExaminationRequests WHERE person_id = @id ORDER BY date DESC";
         private void PrepareCommand(IDatabase db, DbCommand cmd, ExaminationRequest er)
         {
-            cmd.Parameters.Add(db.CreateParameter("@id", "int"));
-            cmd.Parameters["@id"].Value = er.Id;
-
             cmd.Parameters.Add(db.CreateParameter("@type", "varchar", er.Type.Length));
             cmd.Parameters["@type"].Value = er.Type;
 
@@ -38,7 +35,7 @@ namespace ORD.PatientCard.Requests
 
             DbCommand command = db.CreateCommand(sqlINSERT);
             PrepareCommand(db, command, er);
-            db.ExecuteNonQuery(command);
+            er.Id = db.ExecuteScalar(command);
 
             db.Close();
         }
@@ -51,6 +48,8 @@ namespace ORD.PatientCard.Requests
 
             DbCommand command = db.CreateCommand(sqlUPDATE);
             PrepareCommand(db, command, er);
+            command.Parameters.Add(db.CreateParameter("@id", "int"));
+            command.Parameters["@id"].Value = er.Id;
             db.ExecuteNonQuery(command);
 
             db.Close();

@@ -41,6 +41,7 @@ namespace ORD.PatientCard.Examinations
         public List<ExaminationPrice> Prices
         {
             get { return this.prices; }
+            set { this.prices = value; }
         }
     }
 }

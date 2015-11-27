@@ -40,8 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Examinations\Examination.cs" />
+    <Compile Include="Examinations\ExaminationMapper.cs" />
     <Compile Include="Examinations\ExaminationPrice.cs" />
     <Compile Include="Examinations\ExaminationType.cs" />
+    <Compile Include="Examinations\ExaminationTypeMapper.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="PatientMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

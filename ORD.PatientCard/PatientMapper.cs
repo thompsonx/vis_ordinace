@@ -1,6 +1,7 @@
 ﻿using ORD.Database;
 using ORD.Database.Mappers;
 using ORD.HealthInsurances;
+using ORD.PatientCard.Examinations;
 using ORD.PatientCard.Requests;
 using System;
 using System.Collections.Generic;
@@ -153,6 +154,28 @@ namespace ORD.PatientCard
         {
             //LAZY LOADING
             return new RequestMapper().SelectRequests(p.ID, type);
+        }
+
+        /**
+         * Examinations    
+        **/
+
+        public void InsertExamination(Patient p, Examination e)
+        {
+        }
+
+        public void UpdateExamination(Examination e)
+        {
+        }
+
+        public void DeleteExamination(Examination e)
+        {
+        }
+
+        public List<Request> SelectExaminations(Patient p)
+        {
+            //LAZY LOADING
+            return null;
         }
 
     }

@@ -22,11 +22,8 @@ namespace ORD.PatientCard.Examinations
         public const int LEN_DIAGNOSIS = 200;
         public const int LEN_FEE = 1;
 
-        public Examination(DateTime examined, string diagnosis, ExaminationType type)
+        public Examination()
         {
-            this.mExamined = examined;
-            this.mDiagnosis = diagnosis;
-            this.mType = type;
             this.paid = FEE_ABSOLUTION;
         }
 
@@ -38,6 +35,7 @@ namespace ORD.PatientCard.Examinations
         public DateTime Examined
         {
             get { return this.mExamined; }
+            set { this.mExamined = value; }
         }
         public string Diagnosis
         {
@@ -48,6 +46,12 @@ namespace ORD.PatientCard.Examinations
         {
             get { return this.paid; }
             set { this.paid = value; }
+        }
+
+        public ExaminationType Type 
+        {
+            get { return this.mType; }
+            set { this.mType = value; }
         }
     }
 }
