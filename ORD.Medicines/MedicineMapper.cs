@@ -37,12 +37,11 @@ namespace ORD.Medicines
             {
                 return this.medicines.AsReadOnly();
             }
-            private set;
         }
 
         public void LoadMedicines()
         {
-            if (this.Medicines.Count == 0)
+            if (this.Medicines.Count != 0)
                 return;
             try
             {

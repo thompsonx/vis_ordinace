@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ORD.PatientCard.Examinations
 {
-    class ExaminationTypeMapper : IDbMapper<ExaminationType>
+    class ExaminationTypeMapper
     {
         private static string sqlINSERT = "INSERT INTO ExaminationTypes VALUES (@name, @description)";
         private static string sqlUPDATE = "UPDATE ExaminationTypes SET name = @name, description = @description " +

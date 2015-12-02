@@ -21,6 +21,7 @@ namespace ORD.PatientCard
             " insurance = @insurance, street = @street, town = @town, zip_code = @zip, phone_number = @phone WHERE person_id = @id";
         private const string sqlDELETE = "DELETE FROM \"Patient\" WHERE person_id = @pID";
         private const string sqlSELECTALL = "SELECT * FROM Patient ORDER BY surname, name ASC";
+        private const string sqlFIND = "SELECT * FROM Patient WHERE person_id = @id";
 
         public const int LEN_ID = 10;
         public const int LEN_SURNAME = 30;
@@ -87,6 +88,23 @@ namespace ORD.PatientCard
             db.Close();
         }
 
+        public Patient Find(string id)
+        {
+            IDatabase db = new MSSqlDatabase();
+            db.Connect();
+
+            DbCommand command = db.CreateCommand(sqlFIND);
+
+            DbDataReader reader = db.Select(command);
+
+            List<Patient> p = this.Read(reader);
+
+            reader.Close();
+            db.Close();
+
+            return p[0];
+        }
+
         public List<Patient> SelectAll()
         {
             IDatabase db = new MSSqlDatabase();
@@ -121,6 +139,9 @@ namespace ORD.PatientCard
 
                 HealthInsuranceMapper him = HealthInsuranceMapper.GetInstance();
                 p.Insurance = him.Find(reader.GetInt32(3));
+
+                p.Examinations = this.SelectExaminations(p);
+                p.Requests = this.SelectRequests(p);
 
                 patients.Add(p);
             }
@@ -162,20 +183,25 @@ namespace ORD.PatientCard
 
         public void InsertExamination(Patient p, Examination e)
         {
+            ExaminationMapper em = new ExaminationMapper();
+            em.Insert(p.ID, e);
         }
 
         public void UpdateExamination(Examination e)
         {
+            ExaminationMapper em = new ExaminationMapper();
+            em.Update(e);
         }
 
         public void DeleteExamination(Examination e)
         {
+            ExaminationMapper em = new ExaminationMapper();
+            em.Delete(e);
         }
 
-        public List<Request> SelectExaminations(Patient p)
+        public List<Examination> SelectExaminations(Patient p)
         {
-            //LAZY LOADING
-            return null;
+            return new ExaminationMapper().Select(p.ID);
         }
 
     }

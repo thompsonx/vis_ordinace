@@ -1,4 +1,5 @@
 ﻿using ORD.HealthInsurances;
+using ORD.PatientCard.Examinations;
 using ORD.PatientCard.Requests;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace ORD.PatientCard
         private int mPhoneNumber;
 
         private List<Request> requests;
+        private List<Examination> examinations;
 
         public Patient()
         {
@@ -78,6 +80,12 @@ namespace ORD.PatientCard
         {
             get { return this.requests; }
             set { this.requests = value; }
+        }
+
+        public List<Examination> Examinations 
+        {
+            get { return this.examinations; }
+            set { this.examinations = value;}
         }
     }
 }

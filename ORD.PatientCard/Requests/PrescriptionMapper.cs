@@ -173,6 +173,8 @@ namespace ORD.PatientCard.Requests
                 DbDataReader medicines = db.Select(command);
                 er.Medicines = this.ReadMedicines(medicines, medcat);
 
+                medicines.Close();
+
                 requests.Add(er);
             }
 

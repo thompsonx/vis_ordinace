@@ -24,6 +24,16 @@ namespace ORD.PatientCard.Requests
             set { this.mMedicines = value; }
         }
 
+        public String MedicinesToString()
+        {
+            StringBuilder result = new StringBuilder();
+            foreach (Medicine m in this.Medicines) {
+                result.Append(m.ToString());
+                result.Append(", ");
+            }
+            return result.ToString();
+        }
+
         public void Add(Medicine m)
         {
             this.mMedicines.Add(m);

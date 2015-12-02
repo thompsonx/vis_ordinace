@@ -54,14 +54,19 @@ namespace ORD.Medicines
 
         public int PackageSize
         {
-            get { return this.PackageSize; }
-            set { this.PackageSize = value; }
+            get { return this.mPackageSize; }
+            set { this.mPackageSize = value; }
         }
 
         public float Price 
         {
             get { return this.mPrice; }
             set { this.mPrice = value; }
+        }
+
+        public override string ToString()
+        {
+            return this.mName;
         }
     }
 }

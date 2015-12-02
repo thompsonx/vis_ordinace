@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vis_ordinace", "vis_ordinace\vis_ordinace.csproj", "{6962E442-2117-4ED3-8DBF-CDC80A3E96D5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLayer", "BusinessLayer", "{F71F72C0-DDBB-448C-895B-DF7A86C2F163}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataLayer", "DataLayer", "{5D9A6F82-DA61-4976-84B3-C08F5E41F125}"
@@ -25,16 +23,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORD.Strings", "ORD.Strings\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORD.Database.Mappers", "ORD.Database.Mappers\ORD.Database.Mappers.csproj", "{21E94499-2004-4D1D-8110-3C578AFE8924}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORD.WF", "ORD.WF\ORD.WF.csproj", "{621519C1-7B36-40EC-BB87-BC1D771DC770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORD.B.PatientServices", "ORD.B.PatientServices\ORD.B.PatientServices.csproj", "{A276EECE-51AE-4295-BA53-BF6ECA0D5096}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6962E442-2117-4ED3-8DBF-CDC80A3E96D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6962E442-2117-4ED3-8DBF-CDC80A3E96D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6962E442-2117-4ED3-8DBF-CDC80A3E96D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6962E442-2117-4ED3-8DBF-CDC80A3E96D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10B538F6-2685-405C-AF22-7D0536F089A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10B538F6-2685-405C-AF22-7D0536F089A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10B538F6-2685-405C-AF22-7D0536F089A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +61,14 @@ Global
 		{21E94499-2004-4D1D-8110-3C578AFE8924}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21E94499-2004-4D1D-8110-3C578AFE8924}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21E94499-2004-4D1D-8110-3C578AFE8924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{621519C1-7B36-40EC-BB87-BC1D771DC770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{621519C1-7B36-40EC-BB87-BC1D771DC770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{621519C1-7B36-40EC-BB87-BC1D771DC770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{621519C1-7B36-40EC-BB87-BC1D771DC770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A276EECE-51AE-4295-BA53-BF6ECA0D5096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A276EECE-51AE-4295-BA53-BF6ECA0D5096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A276EECE-51AE-4295-BA53-BF6ECA0D5096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A276EECE-51AE-4295-BA53-BF6ECA0D5096}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,5 +81,7 @@ Global
 		{43CC7C41-F066-44C0-B675-18CA10E3A1B9} = {5D9A6F82-DA61-4976-84B3-C08F5E41F125}
 		{47608081-2640-405A-9995-14A7367E2AC8} = {5D9A6F82-DA61-4976-84B3-C08F5E41F125}
 		{21E94499-2004-4D1D-8110-3C578AFE8924} = {5D9A6F82-DA61-4976-84B3-C08F5E41F125}
+		{621519C1-7B36-40EC-BB87-BC1D771DC770} = {29ABAC6D-171D-4AD9-924C-92C4F8BE4361}
+		{A276EECE-51AE-4295-BA53-BF6ECA0D5096} = {F71F72C0-DDBB-448C-895B-DF7A86C2F163}
 	EndGlobalSection
 EndGlobal
