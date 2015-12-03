@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.prescriptionList = new System.Windows.Forms.DataGridView();
-            this.createdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Medicines = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prescriptionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bCreate = new System.Windows.Forms.Button();
+            this.createdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Medicines = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.prescriptionList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.prescriptionBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -54,8 +54,23 @@
             this.prescriptionList.Location = new System.Drawing.Point(12, 62);
             this.prescriptionList.Name = "prescriptionList";
             this.prescriptionList.ReadOnly = true;
-            this.prescriptionList.Size = new System.Drawing.Size(448, 295);
+            this.prescriptionList.Size = new System.Drawing.Size(662, 295);
             this.prescriptionList.TabIndex = 0;
+            // 
+            // prescriptionBindingSource
+            // 
+            this.prescriptionBindingSource.DataSource = typeof(ORD.PatientCard.Requests.Prescription);
+            // 
+            // bCreate
+            // 
+            this.bCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bCreate.Location = new System.Drawing.Point(554, 12);
+            this.bCreate.Name = "bCreate";
+            this.bCreate.Size = new System.Drawing.Size(120, 44);
+            this.bCreate.TabIndex = 1;
+            this.bCreate.Text = "Předepsat recept";
+            this.bCreate.UseVisualStyleBackColor = true;
+            this.bCreate.Click += new System.EventHandler(this.bCreate_Click);
             // 
             // createdDataGridViewTextBoxColumn
             // 
@@ -69,27 +84,13 @@
             this.Medicines.HeaderText = "Léky";
             this.Medicines.Name = "Medicines";
             this.Medicines.ReadOnly = true;
-            // 
-            // prescriptionBindingSource
-            // 
-            this.prescriptionBindingSource.DataSource = typeof(ORD.PatientCard.Requests.Prescription);
-            // 
-            // bCreate
-            // 
-            this.bCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bCreate.Location = new System.Drawing.Point(340, 12);
-            this.bCreate.Name = "bCreate";
-            this.bCreate.Size = new System.Drawing.Size(120, 44);
-            this.bCreate.TabIndex = 1;
-            this.bCreate.Text = "Předepsat recept";
-            this.bCreate.UseVisualStyleBackColor = true;
-            this.bCreate.Click += new System.EventHandler(this.bCreate_Click);
+            this.Medicines.Width = 500;
             // 
             // RequestList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 369);
+            this.ClientSize = new System.Drawing.Size(686, 369);
             this.Controls.Add(this.bCreate);
             this.Controls.Add(this.prescriptionList);
             this.Name = "RequestList";
@@ -104,8 +105,8 @@
 
         private System.Windows.Forms.DataGridView prescriptionList;
         private System.Windows.Forms.Button bCreate;
+        private System.Windows.Forms.BindingSource prescriptionBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn createdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Medicines;
-        private System.Windows.Forms.BindingSource prescriptionBindingSource;
     }
 }

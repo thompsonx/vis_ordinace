@@ -12,17 +12,20 @@ namespace ORD.PatientCard.Requests
 {
     class PrescriptionMapper
     {
-        private static string sqlINSERT = "INSERT INTO Prescriptions VALUES (@date)";
+        private static string sqlINSERT = "INSERT INTO Prescriptions (date, person_id) VALUES (@date, @person)";
         private static string sqlINSERTMEDICINE = "INSERT INTO Prescribed VALUES (@id, @medicineid)";
         private static string sqlUPDATE = "UPDATE Prescriptions SET date = @date WHERE id = @id";
         private static string sqlDELETEMEDICINES = "DELETE FROM Prescribed WHERE id_p = @id";
         private static string sqlDELETE = "DELETE FROM Prescriptions WHERE id_p = @id";
         private static string sqlSELECT = "SELECT * FROM Prescriptions WHERE person_id = @id ORDER BY date DESC";
         private static string sqlSELECTMEDICINE = "SELECT id_medicine FROM Prescribed WHERE id_p = @id";
-        private void PrepareCommand(IDatabase db, DbCommand cmd, Prescription er)
+        private void PrepareCommand(IDatabase db, DbCommand cmd, Prescription er, string p_id)
         {
             cmd.Parameters.Add(db.CreateParameter("@date", "datetime"));
             cmd.Parameters["@date"].Value = er.Created;
+
+            cmd.Parameters.Add(db.CreateParameter("@person", "char", p_id.Length));
+            cmd.Parameters["@person"].Value = p_id;
 
         }
         public void InsertRequest(string p_id, Request r)
@@ -39,7 +42,7 @@ namespace ORD.PatientCard.Requests
             db.BeginTransaction();
 
             DbCommand command = db.CreateCommand(sqlINSERT);
-            PrepareCommand(db, command, er);
+            PrepareCommand(db, command, er, p_id);
             er.Id = db.ExecuteScalar(command);
 
             int added = this.InsertMedicines(er, db);
@@ -83,7 +86,8 @@ namespace ORD.PatientCard.Requests
             db.BeginTransaction();
 
             DbCommand command = db.CreateCommand(sqlUPDATE);
-            PrepareCommand(db, command, er);
+            command.Parameters.Add(db.CreateParameter("@date", "datetime"));
+            command.Parameters["@date"].Value = er.Created;
             command.Parameters.Add(db.CreateParameter("@id", "int"));
             command.Parameters["@id"].Value = er.Id;
             db.ExecuteNonQuery(command);
@@ -159,7 +163,6 @@ namespace ORD.PatientCard.Requests
         {
             List<Request> requests = new List<Request>();
             MedicineMapper medcat = MedicineMapper.GetInstance();
-            medcat.LoadMedicines();
 
             while (reader.Read())
             {

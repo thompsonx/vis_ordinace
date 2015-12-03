@@ -35,13 +35,14 @@ namespace ORD.Medicines
         {
             get
             {
+                this.LoadMedicines();
                 return this.medicines.AsReadOnly();
             }
         }
 
-        public void LoadMedicines()
+        private void LoadMedicines()
         {
-            if (this.Medicines.Count != 0)
+            if (this.medicines.Count != 0)
                 return;
             try
             {

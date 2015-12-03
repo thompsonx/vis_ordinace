@@ -82,6 +82,7 @@
     <EmbeddedResource Include="RequestList.resx">
       <DependentUpon>RequestList.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\ORD.Medicines.Medicine.datasource" />
     <None Include="Properties\DataSources\ORD.PatientCard.Requests.Prescription.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -97,13 +98,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ORD.B.MedicineService\ORD.B.MedicineService.csproj">
+      <Project>{22799605-7054-41ac-b376-8050dc767a87}</Project>
+      <Name>ORD.B.MedicineService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ORD.B.PatientServices\ORD.B.PatientServices.csproj">
       <Project>{a276eece-51ae-4295-ba53-bf6eca0d5096}</Project>
       <Name>ORD.B.PatientServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ORD.Medicines\ORD.Medicines.csproj">
+      <Project>{43cc7c41-f066-44c0-b675-18ca10e3a1b9}</Project>
+      <Name>ORD.Medicines</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ORD.PatientCard\ORD.PatientCard.csproj">
       <Project>{9c85d9c3-421d-477d-ab37-9f4abfca93d4}</Project>
       <Name>ORD.PatientCard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ORD.Strings\ORD.Strings.csproj">
+      <Project>{47608081-2640-405a-9995-14a7367e2ac8}</Project>
+      <Name>ORD.Strings</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

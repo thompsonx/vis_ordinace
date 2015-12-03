@@ -10,7 +10,7 @@ namespace ORD.B.PatientServices
 {
     public class PatientCardService
     {
-        public List<Prescription> getPatientPrescriptions(Patient p)
+        public List<Prescription> GetPatientPrescriptions(Patient p)
         {
             PatientMapper pm = new PatientMapper();
             List<Prescription> prs = new List<Prescription>();
@@ -19,6 +19,12 @@ namespace ORD.B.PatientServices
                 prs.Add((Prescription)r);
             }
             return prs;
+        }
+
+        public void AddPrescription(Patient p, Prescription pres)
+        {
+            PatientMapper pm = new PatientMapper();
+            pm.InsertRequest(p, pres);
         }
     }
 }

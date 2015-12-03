@@ -24,5 +24,7 @@ namespace ORD.Strings
         public const string MED_S_xml_package = "Čtení XML souboru s katalogem léků se nezdařilo! Neplatná velikost balení: ";
         public const string MED_S_xml_price = "Čtení XML souboru s katalogem léků se nezdařilo! Neplatná cena: ";
         public const string MED_S_xml = "Čtení XML souboru s katalogem léků se nezdařilo! Chyba: ";
+
+        public const string GUI_WF_RF_empty = "Nevybrali jste žádné léky! Chcete-li vytvořit recept, musíte přidat léky. Pokud chcete recept zrušit, zavřete okno.";
     }
 }
