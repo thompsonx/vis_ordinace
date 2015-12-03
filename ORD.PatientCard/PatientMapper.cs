@@ -19,7 +19,7 @@ namespace ORD.PatientCard
         private static string sqlINSERT = "INSERT INTO Patient VALUES (@id, @surname, @name, @insurance, @street, @town, @zip, @phone)";
         private const string sqlUPDATE = "UPDATE Patient SET person_id = @id, surname = @surname, name = @name," +
             " insurance = @insurance, street = @street, town = @town, zip_code = @zip, phone_number = @phone WHERE person_id = @id";
-        private const string sqlDELETE = "DELETE FROM \"Patient\" WHERE person_id = @pID";
+        private const string sqlDELETE = "DELETE FROM \"Patient\" WHERE person_id = @id";
         private const string sqlSELECTALL = "SELECT * FROM Patient ORDER BY surname, name ASC";
         private const string sqlFIND = "SELECT * FROM Patient WHERE person_id = @id";
 
@@ -81,10 +81,19 @@ namespace ORD.PatientCard
         {
             IDatabase db = new MSSqlDatabase();
             db.Connect();
-            DbCommand command = db.CreateCommand(sqlUPDATE);
+
+            db.BeginTransaction();
+
+            new RequestMapper().DeletePatientRequests(subject.ID, db);
+            new ExaminationMapper().DeletePatient(subject, db);
+
+            DbCommand command = db.CreateCommand(sqlDELETE);
             command.Parameters.Add(db.CreateParameter("@id", "char", subject.ID.Length));
             command.Parameters["@id"].Value = subject.ID;
             db.ExecuteNonQuery(command);
+
+            db.EndTransaction();
+
             db.Close();
         }
 

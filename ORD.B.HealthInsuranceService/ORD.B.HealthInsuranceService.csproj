@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A276EECE-51AE-4295-BA53-BF6ECA0D5096}</ProjectGuid>
+    <ProjectGuid>{D0B1C09F-04C5-457A-BD02-9E7055D489BC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ORD.B.PatientServices</RootNamespace>
-    <AssemblyName>ORD.B.PatientServices</AssemblyName>
+    <RootNamespace>ORD.B.HealthInsuranceService</RootNamespace>
+    <AssemblyName>ORD.B.HealthInsuranceService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PatientCardService.cs" />
+    <Compile Include="HealthInsuranceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -47,13 +47,9 @@
       <Project>{21e94499-2004-4d1d-8110-3c578afe8924}</Project>
       <Name>ORD.Database.Mappers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ORD.PatientCard\ORD.PatientCard.csproj">
-      <Project>{9c85d9c3-421d-477d-ab37-9f4abfca93d4}</Project>
-      <Name>ORD.PatientCard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ORD.Strings\ORD.Strings.csproj">
-      <Project>{47608081-2640-405a-9995-14a7367e2ac8}</Project>
-      <Name>ORD.Strings</Name>
+    <ProjectReference Include="..\ORD.HealthInsurances\ORD.HealthInsurances.csproj">
+      <Project>{262eb880-8e9d-4e56-9fdd-260ad896841f}</Project>
+      <Name>ORD.HealthInsurances</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

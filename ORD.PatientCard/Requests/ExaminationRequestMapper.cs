@@ -10,10 +10,11 @@ namespace ORD.PatientCard.Requests
 {
     class ExaminationRequestMapper
     {
-        private static string sqlINSERT = "INSERT INTO ExaminationRequests VALUES (@type, @description, @date)";
+        private static string sqlINSERT = "INSERT INTO ExaminationRequests(type, description, date) VALUES (@type, @description, @date)";
         private static string sqlUPDATE = "UPDATE ExaminationRequests SET type = @type, description = @description, " +
             "date = @date WHERE id = @id";
         private static string sqlDELETE = "DELETE FROM ExaminationRequests WHERE id = @id";
+        private static string sqlDELETEPATIENT = "DELETE FROM ExaminationRequests WHERE person_id = @id";
         private static string sqlSELECT = "SELECT * FROM ExaminationRequests WHERE person_id = @id ORDER BY date DESC";
         private void PrepareCommand(IDatabase db, DbCommand cmd, ExaminationRequest er)
         {
@@ -68,6 +69,25 @@ namespace ORD.PatientCard.Requests
             db.ExecuteNonQuery(command);
 
             db.Close();
+        }
+
+        public void DeletePatientRequests(string p_id, IDatabase db)
+        {
+            IDatabase pdb = db;
+            if (db == null)
+            {
+                db = new MSSqlDatabase();
+                db.Connect();
+            }
+
+            DbCommand command = db.CreateCommand(sqlDELETEPATIENT);
+            command.Parameters.Add(db.CreateParameter("@id", "char", p_id.Length));
+            command.Parameters["@id"].Value = p_id;
+
+            db.ExecuteNonQuery(command);
+
+            if (pdb == null)
+                db.Close();
         }
 
         public List<Request> SelectRequests(string p_id)

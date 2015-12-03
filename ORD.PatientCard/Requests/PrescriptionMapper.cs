@@ -17,6 +17,8 @@ namespace ORD.PatientCard.Requests
         private static string sqlUPDATE = "UPDATE Prescriptions SET date = @date WHERE id = @id";
         private static string sqlDELETEMEDICINES = "DELETE FROM Prescribed WHERE id_p = @id";
         private static string sqlDELETE = "DELETE FROM Prescriptions WHERE id_p = @id";
+        private static string sqlDELETEPATIENT1 = "DELETE FROM Prescribed WHERE id_p IN (SELECT id FROM Prescriptions WHERE person_id = @id)";
+        private static string sqlDELETEPATIENT2 = "DELETE FROM Prescriptions WHERE person_id = @id";
         private static string sqlSELECT = "SELECT * FROM Prescriptions WHERE person_id = @id ORDER BY date DESC";
         private static string sqlSELECTMEDICINE = "SELECT id_medicine FROM Prescribed WHERE id_p = @id";
         private void PrepareCommand(IDatabase db, DbCommand cmd, Prescription er, string p_id)
@@ -138,6 +140,37 @@ namespace ORD.PatientCard.Requests
             db.EndTransaction();
 
             db.Close();
+        }
+
+        public void DeletePatientRequests(string p_id, IDatabase db = null)
+        {
+            IDatabase pdb = db;
+            if (db == null)
+            {
+                db = new MSSqlDatabase();
+                db.Connect();
+
+                db.BeginTransaction();
+            }
+
+            DbCommand command = db.CreateCommand(sqlDELETEPATIENT1);
+            command.Parameters.Add(db.CreateParameter("@id", "char", p_id.Length));
+            command.Parameters["@id"].Value = p_id;
+
+            db.ExecuteNonQuery(command);
+
+            command = db.CreateCommand(sqlDELETEPATIENT2);
+            command.Parameters.Add(db.CreateParameter("@id", "char", p_id.Length));
+            command.Parameters["@id"].Value = p_id;
+
+            db.ExecuteNonQuery(command);
+
+            if (pdb == null)
+            {
+                db.EndTransaction();
+
+                db.Close();
+            }
         }
 
         public List<Request> SelectRequests(string p_id)

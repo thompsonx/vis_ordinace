@@ -12,11 +12,12 @@ namespace ORD.PatientCard.Requests
 {
     class SampleRequestMapper
     {
-        private static string sqlINSERT = "INSERT INTO SampleRequests VALUES (@type, @description, @date)";
+        private static string sqlINSERT = "INSERT INTO SampleRequests(type, description, date) VALUES (@type, @description, @date)";
         private static string sqlUPDATE = "UPDATE SampleRequests SET type = @type, description = @description, " +
             "date = @date WHERE id = @id";
         private static string sqlADDRESULTS = "UPDATE SampleRequests SET results = @results, processed = @processed WHERE id = @id";
         private static string sqlDELETE = "DELETE FROM SampleRequests WHERE id = @id";
+        private static string sqlDELETEPATIENT = "DELETE FROM SampleRequests WHERE person_id = @id";
         private static string sqlSELECT = "SELECT * FROM SampleRequests WHERE person_id = @id ORDER BY date DESC";
         private void PrepareCommand(IDatabase db, DbCommand cmd, SampleRequest er)
         {
@@ -118,6 +119,25 @@ namespace ORD.PatientCard.Requests
             db.ExecuteNonQuery(command);
 
             db.Close();
+        }
+
+        public void DeletePatientRequests(string p_id, IDatabase db = null)
+        {
+            IDatabase pdb = db;
+            if (db == null)
+            {
+                db = new MSSqlDatabase();
+                db.Connect();
+            }
+
+            DbCommand command = db.CreateCommand(sqlDELETEPATIENT);
+            command.Parameters.Add(db.CreateParameter("@id", "char", p_id.Length));
+            command.Parameters["@id"].Value = p_id;
+
+            db.ExecuteNonQuery(command);
+
+            if (pdb == null)
+                db.Close();
         }
 
         public List<Request> SelectRequests(string p_id)

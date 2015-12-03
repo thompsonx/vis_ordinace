@@ -1,4 +1,5 @@
-﻿using ORD.Strings;
+﻿using ORD.Database;
+using ORD.Strings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +77,13 @@ namespace ORD.PatientCard.Requests
             {
                 throw new ApplicationException(ErrorMessages.REQ_type);
             }
+        }
+
+        public void DeletePatientRequests(string p_id, IDatabase db = null)
+        {
+            new PrescriptionMapper().DeletePatientRequests(p_id, db);
+            new ExaminationRequestMapper().DeletePatientRequests(p_id, db);
+            new SampleRequestMapper().DeletePatientRequests(p_id, db);
         }
 
         public List<Request> SelectRequests(string p_id, string type = null)

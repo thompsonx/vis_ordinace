@@ -25,6 +25,11 @@ namespace ORD.Strings
         public const string MED_S_xml_price = "Čtení XML souboru s katalogem léků se nezdařilo! Neplatná cena: ";
         public const string MED_S_xml = "Čtení XML souboru s katalogem léků se nezdařilo! Chyba: ";
 
+        public const string SERVICE_P_id_format = "Neplatny format rodneho cisla.";
+        public const string SERVICE_P_id_month = "Neplatny mesic v rodnem cisle.";
+        public const string SERVICE_P_id_year = "Neplatny rok v rodnem cisle.";
+        public const string SERVICE_P_id_date = "Neplatne datum narozeni v rodnem cisle.";
+
         public const string GUI_WF_RF_empty = "Nevybrali jste žádné léky! Chcete-li vytvořit recept, musíte přidat léky. Pokud chcete recept zrušit, zavřete okno.";
     }
 }

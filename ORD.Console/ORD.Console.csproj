@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A276EECE-51AE-4295-BA53-BF6ECA0D5096}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>e7836bf0-ce6b-4aac-9c2a-31a1d455f8af</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ORD.B.PatientServices</RootNamespace>
-    <AssemblyName>ORD.B.PatientServices</AssemblyName>
+    <RootNamespace>ORD.Console</RootNamespace>
+    <AssemblyName>ORD.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,22 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PatientCardService.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ORD.Database.Mappers\ORD.Database.Mappers.csproj">
-      <Project>{21e94499-2004-4d1d-8110-3c578afe8924}</Project>
-      <Name>ORD.Database.Mappers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ORD.PatientCard\ORD.PatientCard.csproj">
-      <Project>{9c85d9c3-421d-477d-ab37-9f4abfca93d4}</Project>
-      <Name>ORD.PatientCard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ORD.Strings\ORD.Strings.csproj">
-      <Project>{47608081-2640-405a-9995-14a7367e2ac8}</Project>
-      <Name>ORD.Strings</Name>
-    </ProjectReference>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

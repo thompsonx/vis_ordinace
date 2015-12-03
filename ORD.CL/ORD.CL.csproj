@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A276EECE-51AE-4295-BA53-BF6ECA0D5096}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{0F35BE6E-55DB-4960-88F2-D09C7DD67C1B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ORD.B.PatientServices</RootNamespace>
-    <AssemblyName>ORD.B.PatientServices</AssemblyName>
+    <RootNamespace>ORD.CL</RootNamespace>
+    <AssemblyName>ORD.CL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,13 +41,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PatientCardService.cs" />
+    <Compile Include="PatientManager.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ORD.Database.Mappers\ORD.Database.Mappers.csproj">
-      <Project>{21e94499-2004-4d1d-8110-3c578afe8924}</Project>
-      <Name>ORD.Database.Mappers</Name>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ORD.B.HealthInsuranceService\ORD.B.HealthInsuranceService.csproj">
+      <Project>{d0b1c09f-04c5-457a-bd02-9e7055d489bc}</Project>
+      <Name>ORD.B.HealthInsuranceService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ORD.B.PatientServices\ORD.B.PatientServices.csproj">
+      <Project>{a276eece-51ae-4295-ba53-bf6eca0d5096}</Project>
+      <Name>ORD.B.PatientServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ORD.HealthInsurances\ORD.HealthInsurances.csproj">
+      <Project>{262eb880-8e9d-4e56-9fdd-260ad896841f}</Project>
+      <Name>ORD.HealthInsurances</Name>
     </ProjectReference>
     <ProjectReference Include="..\ORD.PatientCard\ORD.PatientCard.csproj">
       <Project>{9c85d9c3-421d-477d-ab37-9f4abfca93d4}</Project>

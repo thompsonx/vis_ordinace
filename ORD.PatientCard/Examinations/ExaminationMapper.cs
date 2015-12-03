@@ -10,11 +10,12 @@ namespace ORD.PatientCard.Examinations
 {
     class ExaminationMapper
     {
-        private static string sqlINSERT = "INSERT INTO Examinations VALUES (@examined, @diagnosis, @type, @paid)";
-        private static string sqlUPDATE = "UPDATE Examinations SET examined = @examined, diagnosis = @diagnosis, type = @type " +
+        private static string sqlINSERT = "INSERT INTO Examination VALUES (@examined, @diagnosis, @type, @paid)";
+        private static string sqlUPDATE = "UPDATE Examination SET examined = @examined, diagnosis = @diagnosis, type = @type " +
             "paid = @paid WHERE id = @id";
-        private static string sqlDELETE = "DELETE FROM Examinations WHERE id = @id";
-        private static string sqlSELECT = "SELECT * FROM Examinations WHERE person_id = @id ORDER BY examined DESC";
+        private static string sqlDELETE = "DELETE FROM Examination WHERE id = @id";
+        private static string sqlDELETEPATIENT = "DELETE FROM Examination WHERE person_id = @id";
+        private static string sqlSELECT = "SELECT * FROM Examination WHERE person_id = @id ORDER BY examined DESC";
         private void PrepareCommand(IDatabase db, DbCommand cmd, Examination er)
         {
             cmd.Parameters.Add(db.CreateParameter("@examined", "datetime"));
@@ -67,6 +68,25 @@ namespace ORD.PatientCard.Examinations
             db.ExecuteNonQuery(command);
 
             db.Close();
+        }
+
+        public void DeletePatient(Patient p, IDatabase db = null)
+        {
+            IDatabase pdb = db;
+            if (db == null)
+            {
+                db = new MSSqlDatabase();
+                db.Connect();
+            }
+
+            DbCommand command = db.CreateCommand(sqlDELETEPATIENT);
+            command.Parameters.Add(db.CreateParameter("@id", "char", p.ID.Length));
+            command.Parameters["@id"].Value = p.ID;
+
+            db.ExecuteNonQuery(command);
+
+            if (pdb == null)
+                db.Close();
         }
 
         public List<Examination> Select(string p_id)
