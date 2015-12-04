@@ -17,7 +17,7 @@ namespace ORD.PatientCard
     public class PatientMapper : IDbMapper<Patient>
     {
         private static string sqlINSERT = "INSERT INTO Patient VALUES (@id, @surname, @name, @insurance, @street, @town, @zip, @phone)";
-        private const string sqlUPDATE = "UPDATE Patient SET person_id = @id, surname = @surname, name = @name," +
+        private const string sqlUPDATE = "UPDATE Patient SET surname = @surname, name = @name," +
             " insurance = @insurance, street = @street, town = @town, zip_code = @zip, phone_number = @phone WHERE person_id = @id";
         private const string sqlDELETE = "DELETE FROM \"Patient\" WHERE person_id = @id";
         private const string sqlSELECTALL = "SELECT * FROM Patient ORDER BY surname, name ASC";

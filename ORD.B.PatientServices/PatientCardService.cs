@@ -27,6 +27,11 @@ namespace ORD.B.PatientServices
         {
             this.pm.Insert(p);
         }
+
+        public void EditPatient(Patient p)
+        {
+            this.pm.Update(p);
+        }
         public List<Prescription> GetPatientPrescriptions(Patient p)
         {
             List<Prescription> prs = new List<Prescription>();
