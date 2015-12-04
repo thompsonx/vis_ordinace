@@ -18,7 +18,7 @@ namespace ORD.B.PatientServices
         {
             this.pm = new PatientMapper();
         }
-        public List<Patient> GetPatients()
+        public IList<Patient> GetPatients()
         {
             return this.pm.SelectAll();
         }
@@ -47,6 +47,11 @@ namespace ORD.B.PatientServices
             pm.InsertRequest(p, pres);
         }
 
+        public void RemovePrescription(Prescription p)
+        {
+            pm.DeleteRequest(p);
+        }
+
         public void DeletePatient(Patient p)
         {
             this.pm.Delete(p);
@@ -72,7 +77,7 @@ namespace ORD.B.PatientServices
             string errmsg = String.Format(" ID {0}: {1} {2}", p.ID, p.Surname, p.Name);
 
             if (p.ID.Length < 9 || p.ID.Length > 10)
-                throw new ApplicationException(ErrorMessages.SERVICE_P_id_format + errmsg);
+                throw new ApplicationException(ErrorMessages.Messages["SERVICE_P_id_format"] + errmsg);
 
             //Day
             birth.Append(p.ID.Substring(4, 2)).Append('.');
@@ -96,7 +101,7 @@ namespace ORD.B.PatientServices
             }
             else
             {
-                throw new ApplicationException(ErrorMessages.SERVICE_P_id_month + errmsg);
+                throw new ApplicationException(ErrorMessages.Messages["SERVICE_P_id_month"] + errmsg);
             }
             birth.Append(".");
 
@@ -105,7 +110,7 @@ namespace ORD.B.PatientServices
             int y;
             if (!Int32.TryParse(year, out y))
             {
-                throw new ApplicationException(ErrorMessages.SERVICE_P_id_year + errmsg);
+                throw new ApplicationException(ErrorMessages.Messages["SERVICE_P_id_year"] + errmsg);
             }
             if (p.ID.Length == 9 || (p.ID.Length == 10 && y >= 54))
             {
@@ -118,7 +123,7 @@ namespace ORD.B.PatientServices
 
             if (!DateTime.TryParse(birth.ToString(), out birthdate))
             {
-                throw new ApplicationException(ErrorMessages.SERVICE_P_id_date + errmsg);
+                throw new ApplicationException(ErrorMessages.Messages["SERVICE_P_id_date"] + errmsg);
             }
             return birthdate;
         }

@@ -13,7 +13,7 @@ namespace ORD.CL
     class PatientManager
     {
         private PatientCardService pcs;
-        private List<Patient> patients;
+        private IList<Patient> patients;
         public PatientManager()
         {
             this.pcs = new PatientCardService();

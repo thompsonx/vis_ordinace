@@ -19,16 +19,16 @@ namespace ORD.Medicines
             return mapper;
         }
 
-        private List<Medicine> medicines;
+        private Dictionary<int, Medicine> medicines;
 
         private MedicineMapper()
         {
-            this.medicines = new List<Medicine>();
+            this.medicines = new Dictionary<int,Medicine>();
         }
 
         private void Add(Medicine m)
         {
-            this.medicines.Add(m);
+            this.medicines.Add(m.Id, m);
         }
 
         public IList<Medicine> Medicines
@@ -36,7 +36,7 @@ namespace ORD.Medicines
             get
             {
                 this.LoadMedicines();
-                return this.medicines.AsReadOnly();
+                return this.medicines.Values.ToList();
             }
         }
 
@@ -47,14 +47,14 @@ namespace ORD.Medicines
             try
             {
                 XmlDocument xml = new XmlDocument();
-                xml.Load(Config.XML_medicines);
+                xml.Load(Config.Settings["XML_medicines"]);
                 XmlNodeList meds = xml.DocumentElement.SelectNodes("//medicine");
 
                 foreach (XmlNode node in meds)
                 {
                     int id;
                     if (!Int32.TryParse(node.ChildNodes[0].InnerText, out id))
-                        throw new ApplicationException(ErrorMessages.MED_S_xml_id + node.ChildNodes[0].InnerText);
+                        throw new ApplicationException(ErrorMessages.Messages["MED_S_xml_id"] + node.ChildNodes[0].InnerText);
                     string name = node.ChildNodes[1].InnerText;
                     string description = node.ChildNodes[2].InnerText;
                     List<string> allergens = new List<string>();
@@ -64,10 +64,10 @@ namespace ORD.Medicines
                     }
                     int package;
                     if (!Int32.TryParse(node.ChildNodes[4].InnerText, out package))
-                        throw new ApplicationException(ErrorMessages.MED_S_xml_package + node.ChildNodes[4].InnerText);
+                        throw new ApplicationException(ErrorMessages.Messages["MED_S_xml_package"] + node.ChildNodes[4].InnerText);
                     float price;
                     if (!Single.TryParse(node.ChildNodes[5].InnerText, out price))
-                        throw new ApplicationException(ErrorMessages.MED_S_xml_price + node.ChildNodes[5].InnerText);
+                        throw new ApplicationException(ErrorMessages.Messages["MED_S_xml_price"] + node.ChildNodes[5].InnerText);
 
                     Medicine m = new Medicine();
                     m.Id = id;
@@ -81,14 +81,17 @@ namespace ORD.Medicines
             }
             catch (Exception e)
             {
-                throw new ApplicationException(ErrorMessages.MED_S_xml + e.Message);
+                throw new ApplicationException(ErrorMessages.Messages["MED_S_xml"] + e.Message);
             }
         }
 
         public Medicine Find(int id)
         {
             this.LoadMedicines();
-            return this.medicines.Find(x => x.Id == id);
+            if (this.medicines.ContainsKey(id))
+                return this.medicines[id];
+            else
+                return null;
         }
     }
 }

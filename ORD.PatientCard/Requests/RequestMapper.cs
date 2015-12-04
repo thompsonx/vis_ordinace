@@ -29,7 +29,7 @@ namespace ORD.PatientCard.Requests
             }
             else
             {
-                throw new ApplicationException(ErrorMessages.REQ_type);
+                throw new ApplicationException(ErrorMessages.Messages["REQ_type"]);
             }
         }
 
@@ -52,7 +52,7 @@ namespace ORD.PatientCard.Requests
             }
             else
             {
-                throw new ApplicationException(ErrorMessages.REQ_type);
+                throw new ApplicationException(ErrorMessages.Messages["REQ_type"]);
             }
         }
 
@@ -75,7 +75,7 @@ namespace ORD.PatientCard.Requests
             }
             else
             {
-                throw new ApplicationException(ErrorMessages.REQ_type);
+                throw new ApplicationException(ErrorMessages.Messages["REQ_type"]);
             }
         }
 
@@ -106,7 +106,7 @@ namespace ORD.PatientCard.Requests
                 case "examinationrequest":
                     return new ExaminationRequestMapper().SelectRequests(p_id);
                 default:
-                    throw new ApplicationException(ErrorMessages.REQ_type);
+                    throw new ApplicationException(ErrorMessages.Messages["REQ_type"]);
             }
         }
     }

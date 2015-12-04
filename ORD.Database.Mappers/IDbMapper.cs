@@ -11,6 +11,6 @@ namespace ORD.Database.Mappers
         void Insert(T subject);
         void Update(T subject);
         void Delete(T subject);
-        List<T> SelectAll();
+        IList<T> SelectAll();
     }
 }

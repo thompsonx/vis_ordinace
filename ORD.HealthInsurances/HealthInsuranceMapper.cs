@@ -28,7 +28,7 @@ namespace ORD.HealthInsurances
             return insurance;
         }
 
-        private List<HealthInsurance> insurances = null;
+        private Dictionary<int, HealthInsurance> insurances = null;
 
         private HealthInsuranceMapper() {
 
@@ -58,6 +58,9 @@ namespace ORD.HealthInsurances
             db.ExecuteNonQuery(command);
 
             db.Close();
+
+            if (this.insurances.ContainsKey(subject.Code))
+                this.insurances.Remove(subject.Code);
         }
 
         public void Delete(HealthInsurance subject)
@@ -95,11 +98,11 @@ namespace ORD.HealthInsurances
             cmd.Parameters["@phone"].Value = hi.PhoneNumber;
         }
 
-        public List<HealthInsurance> SelectAll()
+        public IList<HealthInsurance> SelectAll()
         {
             if (this.insurances != null)
             {
-                return this.insurances;
+                return this.insurances.Values.ToList();
             }
 
             IDatabase db = new MSSqlDatabase();
@@ -114,12 +117,12 @@ namespace ORD.HealthInsurances
             reader.Close();
             db.Close();
 
-            return this.insurances;
+            return this.insurances.Values.ToList();
         }
 
-        private List<HealthInsurance> Read(DbDataReader reader)
+        private Dictionary<int, HealthInsurance> Read(DbDataReader reader)
         {
-            List<HealthInsurance> insurances = new List<HealthInsurance>();
+            Dictionary<int, HealthInsurance> insurances = new Dictionary<int, HealthInsurance>();
 
             while (reader.Read())
             {
@@ -132,7 +135,7 @@ namespace ORD.HealthInsurances
                 hi.ZipCode = reader.GetInt32(4);
                 hi.PhoneNumber = reader.GetInt32(5);
 
-                insurances.Add(hi);
+                insurances.Add(hi.Code, hi);
             }
 
             return insurances;
@@ -141,7 +144,14 @@ namespace ORD.HealthInsurances
         public HealthInsurance Find(int id)
         {
             this.SelectAll();
-            return this.insurances.Find(x => x.Code == id);
+            if (this.insurances.ContainsKey(id))
+            {
+                return this.insurances[id];
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

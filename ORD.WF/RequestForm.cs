@@ -56,7 +56,7 @@ namespace ORD.WF
         {
             if (this.medicineBindingSource.Count == 0)
             {
-                MessageBox.Show(ErrorMessages.GUI_WF_RF_empty);
+                MessageBox.Show(ErrorMessages.Messages["GUI_WF_RF_empty"]);
             }
             else
             {

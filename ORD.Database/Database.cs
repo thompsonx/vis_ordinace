@@ -28,7 +28,7 @@ namespace ORD.Database
                 }
                 catch (Exception e)
                 {
-                    throw new ApplicationException(ErrorMessages.DB_conn + " : " + e.Message);
+                    throw new ApplicationException(ErrorMessages.Messages["DB_conn"] + " : " + e.Message);
                 }
             }
             return true;
@@ -54,7 +54,7 @@ namespace ORD.Database
             }
             catch (Exception e)
             {
-                throw new ApplicationException(ErrorMessages.DB_close + " : " + e.Message);
+                throw new ApplicationException(ErrorMessages.Messages["DB_close"] + " : " + e.Message);
             }
         }
 

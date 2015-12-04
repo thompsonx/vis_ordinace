@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.prescriptionList = new System.Windows.Forms.DataGridView();
-            this.prescriptionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.bCreate = new System.Windows.Forms.Button();
             this.createdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Medicines = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prescriptionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bCreate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.prescriptionList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.prescriptionBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -41,7 +41,6 @@
             // prescriptionList
             // 
             this.prescriptionList.AllowUserToAddRows = false;
-            this.prescriptionList.AllowUserToDeleteRows = false;
             this.prescriptionList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -57,6 +56,20 @@
             this.prescriptionList.Size = new System.Drawing.Size(662, 295);
             this.prescriptionList.TabIndex = 0;
             // 
+            // createdDataGridViewTextBoxColumn
+            // 
+            this.createdDataGridViewTextBoxColumn.DataPropertyName = "Created";
+            this.createdDataGridViewTextBoxColumn.HeaderText = "Datum";
+            this.createdDataGridViewTextBoxColumn.Name = "createdDataGridViewTextBoxColumn";
+            this.createdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Medicines
+            // 
+            this.Medicines.HeaderText = "Léky";
+            this.Medicines.Name = "Medicines";
+            this.Medicines.ReadOnly = true;
+            this.Medicines.Width = 500;
+            // 
             // prescriptionBindingSource
             // 
             this.prescriptionBindingSource.DataSource = typeof(ORD.PatientCard.Requests.Prescription);
@@ -71,20 +84,6 @@
             this.bCreate.Text = "Předepsat recept";
             this.bCreate.UseVisualStyleBackColor = true;
             this.bCreate.Click += new System.EventHandler(this.bCreate_Click);
-            // 
-            // createdDataGridViewTextBoxColumn
-            // 
-            this.createdDataGridViewTextBoxColumn.DataPropertyName = "Created";
-            this.createdDataGridViewTextBoxColumn.HeaderText = "Datum";
-            this.createdDataGridViewTextBoxColumn.Name = "createdDataGridViewTextBoxColumn";
-            this.createdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // Medicines
-            // 
-            this.Medicines.HeaderText = "Léky";
-            this.Medicines.Name = "Medicines";
-            this.Medicines.ReadOnly = true;
-            this.Medicines.Width = 500;
             // 
             // RequestList
             // 

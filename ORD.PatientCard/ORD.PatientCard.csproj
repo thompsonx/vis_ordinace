@@ -55,6 +55,8 @@
     <Compile Include="Requests\RequestMapper.cs" />
     <Compile Include="Requests\SampleRequest.cs" />
     <Compile Include="Requests\SampleRequestMapper.cs" />
+    <Compile Include="VirtualList.cs" />
+    <Compile Include="VirtualListLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ORD.Database.Mappers\ORD.Database.Mappers.csproj">

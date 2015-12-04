@@ -1,35 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ORD.Strings
 {
-    public class ErrorMessages
+    public static class ErrorMessages
     {
-        public const string DB_conn = "Nelze se připojit k databázi.";
-        public const string DB_close = "Chyba ukončení spojení databáze.";
-        public const string DB_param = "Neznámý DB datový typ.";
+        public static Dictionary<string, string> Messages;
 
-        public const string REQ_type = "Neznámý typ žádanky!";
-        public const string REQ_P_medicines = "Nepřidali jste žádný lék! Nelze přidat prázdný recept!";
-        public const string REQ_P_unknownm = "Recept obsahuje neznámé ID léku! ID léku: ";
-
-        public const string REQ_S_xml_id = "Čtení XML souboru s výsledky odběrů se nezdařilo! Neplatné ID: ";
-        public const string REQ_S_xml_processed = "Čtení XML souboru s výsledky odběrů se nezdařilo! Neplatný formát data: ";
-        public const string REQ_S_xml = "Čtení XML souboru s výsledky odběrů se nezdařilo! Chyba: ";
-
-        public const string MED_S_xml_id = "Čtení XML souboru s katalogem léků se nezdařilo! Neplatné ID: ";
-        public const string MED_S_xml_package = "Čtení XML souboru s katalogem léků se nezdařilo! Neplatná velikost balení: ";
-        public const string MED_S_xml_price = "Čtení XML souboru s katalogem léků se nezdařilo! Neplatná cena: ";
-        public const string MED_S_xml = "Čtení XML souboru s katalogem léků se nezdařilo! Chyba: ";
-
-        public const string SERVICE_P_id_format = "Neplatny format rodneho cisla.";
-        public const string SERVICE_P_id_month = "Neplatny mesic v rodnem cisle.";
-        public const string SERVICE_P_id_year = "Neplatny rok v rodnem cisle.";
-        public const string SERVICE_P_id_date = "Neplatne datum narozeni v rodnem cisle.";
-
-        public const string GUI_WF_RF_empty = "Nevybrali jste žádné léky! Chcete-li vytvořit recept, musíte přidat léky. Pokud chcete recept zrušit, zavřete okno.";
+        static ErrorMessages()
+        {
+            Messages = new Dictionary<string, string>();
+            try
+            {
+                using (StreamReader sr = new StreamReader("../../../errormessages.ini"))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string msg = sr.ReadLine();
+                        string[] parts = msg.Split('=');
+                        Messages.Add(parts[0], parts[1]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Chyba v konfiguračním souboru errormessages.ini! " + ex.Message);
+            }
+        }
     }
 }

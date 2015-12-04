@@ -15,7 +15,7 @@ namespace ORD.Database
         public MSSqlDatabase()
         {
             this.mConnection = new SqlConnection();
-            this.CONNECTION_STRING = Config.DB_connection;
+            this.CONNECTION_STRING = Config.Settings["DB_connection"];
         }
 
         public override int ExecuteScalar(System.Data.Common.DbCommand command)
@@ -86,7 +86,7 @@ namespace ORD.Database
                     datatype = SqlDbType.DateTime;
                     return new SqlParameter(name, datatype);
                 default:
-                    throw new ApplicationException(ErrorMessages.DB_param);
+                    throw new ApplicationException(ErrorMessages.Messages["DB_param"]);
             }
         }
     }

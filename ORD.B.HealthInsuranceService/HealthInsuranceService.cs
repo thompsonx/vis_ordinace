@@ -9,7 +9,7 @@ namespace ORD.B.HealthInsuranceService
 {
     public class HealthInsuranceService
     {
-        public List<HealthInsurance> GetInsurances()
+        public IList<HealthInsurance> GetInsurances()
         {
             return HealthInsuranceMapper.GetInstance().SelectAll();
         }

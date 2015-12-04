@@ -16,7 +16,7 @@ namespace ORD.PatientCard.Requests
         private static string sqlINSERTMEDICINE = "INSERT INTO Prescribed VALUES (@id, @medicineid)";
         private static string sqlUPDATE = "UPDATE Prescriptions SET date = @date WHERE id = @id";
         private static string sqlDELETEMEDICINES = "DELETE FROM Prescribed WHERE id_p = @id";
-        private static string sqlDELETE = "DELETE FROM Prescriptions WHERE id_p = @id";
+        private static string sqlDELETE = "DELETE FROM Prescriptions WHERE id = @id";
         private static string sqlDELETEPATIENT1 = "DELETE FROM Prescribed WHERE id_p IN (SELECT id FROM Prescriptions WHERE person_id = @id)";
         private static string sqlDELETEPATIENT2 = "DELETE FROM Prescriptions WHERE person_id = @id";
         private static string sqlSELECT = "SELECT * FROM Prescriptions WHERE person_id = @id ORDER BY date DESC";
@@ -35,7 +35,7 @@ namespace ORD.PatientCard.Requests
             Prescription er = (Prescription)r;
             if (er.Medicines.Count == 0)
             {
-                throw new ApplicationException(ErrorMessages.REQ_P_medicines);
+                throw new ApplicationException(ErrorMessages.Messages["REQ_P_medicines"]);
             }
 
             IDatabase db = new MSSqlDatabase();
@@ -113,8 +113,8 @@ namespace ORD.PatientCard.Requests
             db.Connect();
 
             DbCommand command = db.CreateCommand(sqlDELETEMEDICINES);
-            command.Parameters.Add(db.CreateParameter("@id_p", "int"));
-            command.Parameters["@id_p"].Value = p.Id;
+            command.Parameters.Add(db.CreateParameter("@id", "int"));
+            command.Parameters["@id"].Value = p.Id;
 
             db.ExecuteNonQuery(command);
 
@@ -226,7 +226,7 @@ namespace ORD.PatientCard.Requests
                 int id = reader.GetInt32(0);
                 Medicine m = catalogue.Find(id);
                 if (m == null)
-                    throw new ApplicationException(ErrorMessages.REQ_P_unknownm + id.ToString());
+                    throw new ApplicationException(ErrorMessages.Messages["REQ_P_unknownm"] + id.ToString());
 
                 medicines.Add(m);
             }

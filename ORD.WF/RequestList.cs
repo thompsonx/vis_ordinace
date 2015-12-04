@@ -37,6 +37,13 @@ namespace ORD.WF
                 this.Close();
             }
             this.prescriptionList.RowsAdded += prescriptionList_RowsAdded;
+            this.prescriptionList.UserDeletingRow += prescriptionList_UserDeletingRow;
+        }
+
+        void prescriptionList_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            //MessageBox.Show(((Prescription)this.prescriptionBindingSource[e.Row.Index]).MedicinesToString());
+            this.service.RemovePrescription((Prescription)this.prescriptionBindingSource[e.Row.Index]);
         }
 
         void prescriptionList_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)

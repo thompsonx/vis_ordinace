@@ -4,6 +4,7 @@ using ORD.HealthInsurances;
 using ORD.PatientCard.Examinations;
 using ORD.PatientCard.Requests;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -23,11 +24,12 @@ namespace ORD.PatientCard
         private const string sqlSELECTALL = "SELECT * FROM Patient ORDER BY surname, name ASC";
         private const string sqlFIND = "SELECT * FROM Patient WHERE person_id = @id";
 
-        public const int LEN_ID = 10;
-        public const int LEN_SURNAME = 30;
-        public const int LEN_NAME = 30;
-        public const int LEN_STREET = 50;
-        public const int LEN_TOWN = 50;
+        private Dictionary<string, Patient> patientMap;
+
+        public PatientMapper()
+        {
+            this.patientMap = new Dictionary<string, Patient>();
+        }
 
         private void PrepareCommand(IDatabase db, DbCommand cmd, Patient p)
         {
@@ -66,6 +68,8 @@ namespace ORD.PatientCard
             db.ExecuteNonQuery(command);
 
             db.Close();
+
+            this.patientMap.Add(subject.ID, subject);
         }
 
         public void Update(Patient subject)
@@ -95,10 +99,16 @@ namespace ORD.PatientCard
             db.EndTransaction();
 
             db.Close();
+            
+            if (this.patientMap.ContainsKey(subject.ID))
+                patientMap.Remove(subject.ID);
         }
 
         public Patient Find(string id)
         {
+            if (this.patientMap.ContainsKey(id))
+                return this.patientMap[id];
+
             IDatabase db = new MSSqlDatabase();
             db.Connect();
 
@@ -106,15 +116,33 @@ namespace ORD.PatientCard
 
             DbDataReader reader = db.Select(command);
 
-            List<Patient> p = this.Read(reader);
+            Patient p = null;
+            if (reader.Read())
+            {
+                p = new Patient();
+                p.ID = reader.GetString(0);
+                p.Surname = reader.GetString(1);
+                p.Name = reader.GetString(2);
+                p.Street = reader.GetString(4);
+                p.Town = reader.GetString(5);
+                p.ZipCode = reader.GetInt32(6);
+                p.PhoneNumber = reader.GetInt32(7);
+
+                HealthInsuranceMapper him = HealthInsuranceMapper.GetInstance();
+                p.Insurance = him.Find(reader.GetInt32(3));
+
+                p.Examinations = new VirtualList<Examination>(new ExaminationLoader(p.ID));
+                p.Requests = new VirtualList<Request>(new RequestLoader(p.ID));
+                this.patientMap.Add(p.ID, p);
+            }
 
             reader.Close();
             db.Close();
 
-            return p[0];
+            return p;
         }
 
-        public List<Patient> SelectAll()
+        public IList<Patient> SelectAll()
         {
             IDatabase db = new MSSqlDatabase();
             db.Connect();
@@ -133,7 +161,7 @@ namespace ORD.PatientCard
 
         private List<Patient> Read(DbDataReader reader)
         {
-            List<Patient> patients = new List<Patient>();
+            Dictionary<string, Patient> patients = new Dictionary<string, Patient>();
 
             while (reader.Read())
             {
@@ -149,13 +177,14 @@ namespace ORD.PatientCard
                 HealthInsuranceMapper him = HealthInsuranceMapper.GetInstance();
                 p.Insurance = him.Find(reader.GetInt32(3));
 
-                p.Examinations = this.SelectExaminations(p);
-                p.Requests = this.SelectRequests(p);
+                p.Examinations = new VirtualList<Examination>(new ExaminationLoader(p.ID));
+                p.Requests = new VirtualList<Request>(new RequestLoader(p.ID));
 
-                patients.Add(p);
+                patients.Add(p.ID, p);
             }
 
-            return patients;
+            this.patientMap = patients;
+            return patients.Values.ToList();
         }
 
         /**
@@ -182,7 +211,6 @@ namespace ORD.PatientCard
 
         public List<Request> SelectRequests(Patient p, string type = null)
         {
-            //LAZY LOADING
             return new RequestMapper().SelectRequests(p.ID, type);
         }
 
@@ -211,6 +239,34 @@ namespace ORD.PatientCard
         public List<Examination> SelectExaminations(Patient p)
         {
             return new ExaminationMapper().Select(p.ID);
+        }
+
+        public class ExaminationLoader : VirtualListLoader<Examination>
+        {
+            private string patient;
+
+            public ExaminationLoader(string p_id)
+            {
+                this.patient = p_id;
+            }
+            public IList<Examination> Load()
+            {
+                return new ExaminationMapper().Select(this.patient);
+            }
+        }
+
+        public class RequestLoader : VirtualListLoader<Request>
+        {
+            private string patient;
+
+            public RequestLoader(string p_id)
+            {
+                this.patient = p_id;
+            }
+            public IList<Request> Load()
+            {
+                return new RequestMapper().SelectRequests(patient);
+            }
         }
 
     }

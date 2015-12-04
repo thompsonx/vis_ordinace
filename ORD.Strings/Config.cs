@@ -1,16 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ORD.Strings
 {
-    public class Config
+    public static class Config
     {
-        public const string XML_request = "../../../samplerequests.xml";
-        public const string XML_medicines = "../../../medicines.xml";
+        public static Dictionary<string, string> Settings;
 
-        public const string DB_connection = "server=probook430\\mssql2014;database=VIS;user=vis;password=vis2015;MultipleActiveResultSets=true;";
+        static Config()
+        {
+            Settings = new Dictionary<string, string>();
+            try
+            {
+                using (StreamReader sr = new StreamReader("../../../config.ini"))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string msg = sr.ReadLine();
+                        string[] parts = msg.Split('~');
+                        Settings.Add(parts[0], parts[1]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Chyba v konfiguračním souboru config.ini! " + ex.Message);
+            }
+        }
     }
 }

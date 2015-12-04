@@ -20,8 +20,8 @@ namespace ORD.PatientCard
         private int mZipCode;
         private int mPhoneNumber;
 
-        private List<Request> requests;
-        private List<Examination> examinations;
+        private IList<Request> requests;
+        private IList<Examination> examinations;
 
         public Patient()
         {
@@ -76,13 +76,13 @@ namespace ORD.PatientCard
             set { this.mPhoneNumber = value; }
         }
 
-        public List<Request> Requests 
+        public IList<Request> Requests 
         {
             get { return this.requests; }
             set { this.requests = value; }
         }
 
-        public List<Examination> Examinations 
+        public IList<Examination> Examinations 
         {
             get { return this.examinations; }
             set { this.examinations = value;}

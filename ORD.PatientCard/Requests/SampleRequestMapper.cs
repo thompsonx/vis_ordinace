@@ -78,7 +78,7 @@ namespace ORD.PatientCard.Requests
             try
             {
                 XmlDocument xml = new XmlDocument();
-                xml.Load(Config.XML_request);
+                xml.Load(Config.Settings["XML_request"]);
                 IDatabase db = new MSSqlDatabase();
                 db.Connect();
 
@@ -90,11 +90,11 @@ namespace ORD.PatientCard.Requests
                 {
                     int id;
                     if (!Int32.TryParse(node.ChildNodes[0].InnerText, out id))
-                        throw new ApplicationException(ErrorMessages.REQ_S_xml_id + node.ChildNodes[0].InnerText);
+                        throw new ApplicationException(ErrorMessages.Messages["REQ_S_xml_id"] + node.ChildNodes[0].InnerText);
                     string results = node.ChildNodes[4].InnerText;
                     DateTime processed;
                     if (!DateTime.TryParse(node.ChildNodes[5].InnerText, out processed))
-                        throw new ApplicationException(ErrorMessages.REQ_S_xml_processed + node.ChildNodes[5].InnerText);
+                        throw new ApplicationException(ErrorMessages.Messages["REQ_S_xml_processed"] + node.ChildNodes[5].InnerText);
                     this.AddResults(id, results, processed, db);
                 }
                 db.EndTransaction();
@@ -102,7 +102,7 @@ namespace ORD.PatientCard.Requests
             }
             catch (Exception e)
             {
-                throw new ApplicationException(ErrorMessages.REQ_S_xml + e.Message);
+                throw new ApplicationException(ErrorMessages.Messages["REQ_S_xml"] + e.Message);
             }
         }
 

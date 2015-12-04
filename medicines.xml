@@ -2,8 +2,8 @@
 <medicines>
 	<medicine>
 		<id>1</id>
-		<name>et magnis dis parturient</name>
-		<description>et netus et malesuada fames ac turpis egestas. Fusce aliquet magna a neque. Nullam ut nisi</description>
+		<name>ACC 100 NEO</name>
+		<description>Léčivá látka acetylcystein rozpouští všechny složky, které způsobují vazkost hlenu. Tím podporuje vykašlávání a tlumí dráždivý kašel. Acetylcystein působí také antioxidačně, a tak podporuje obranné mechanismy organismu.</description>
 		<allergen>
 			<allergen>In</allergen>
 			<allergen>amet risus. Donec</allergen>
@@ -14,8 +14,8 @@
 	</medicine>
 	<medicine>
 		<id>2</id>
-		<name>habitant morbi tristique senectus</name>
-		<description>mollis. Duis sit amet diam eu dolor egestas rhoncus. Proin nisl sem,</description>
+		<name>NUROFEN 200 MG</name>
+		<description>Nurofen 200 mg patří mezi léky označené jako analgetika, antipyretika, nesteroidní antirevmatika (léky určené k tlumení bolesti, horečky a zánětu).</description>
 		<allergens>
 			<allergen>In</allergen>
 		</allergens>
@@ -24,8 +24,8 @@
 	</medicine>
 	<medicine>
 		<id>3</id>
-		<name>egestas. Duis ac</name>
-		<description>enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis, magna tellus faucibus leo, in lobortis tellus justo sit amet nulla. Donec non</description>
+		<name>COLDREX TABLETY</name>
+		<description>COLDREX TABLETY obsahuje paracetamol, léčivou látku s účinkem proti bolesti a horečce, odstraňující bolesti v krku, bolesti hlavy, svalů i kloubů a snižující horečku.</description>
 		<allergens>
 			<allergen>In</allergen>
 			<allergen>mauris ipsum porta</allergen>
@@ -35,8 +35,10 @@
 	</medicine>
 	<medicine>
 		<id>4</id>
-		<name>lorem fringilla</name>
-		<description>amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin</description>
+		<name>HELICID 10</name>
+		<description>HELICID 10 obsahuje léčivou látku omeprazol. Omeprazol patří do skupiny léčiv 
+nazývaných inhibitory protonové pumpy. Účinkují tak, že snižují množství kyseliny, která se tvoří ve 
+Vašem žaludku. </description>
 		<allergens>
 			<allergen>In</allergen>
 			<allergen>amet risus. Donec</allergen>
@@ -47,8 +49,8 @@
 	</medicine>
 	<medicine>
 		<id>5</id>
-		<name>massa.</name>
-		<description>Mauris molestie pharetra nibh. Aliquam ornare, libero at auctor ullamcorper, nisl arcu iaculis enim, sit amet ornare lectus justo</description>
+		<name>HYLAK FORTE</name>
+		<description>Hylak forte, je eubiotikum, které obsahuje látky (produkty metabolismu) přirozené střevní mikroflóry. Pro svoji existenci potřebují bakterie určité životní prostředí s přesně definovanými poměry kyselin.</description>
 		<allergens>
 			<allergen>In</allergen>
 			<allergen>amet risus. Donec</allergen>
@@ -61,8 +63,8 @@
 	</medicine>
 	<medicine>
 		<id>6</id>
-		<name>malesuada</name>
-		<description>nunc risus varius orci, in consequat enim diam vel arcu. Curabitur ut odio vel est tempor bibendum. Donec felis orci, adipiscing non, luctus sit amet, faucibus ut, nulla. Cras</description>
+		<name>IBALGIN RAPID</name>
+		<description>Obsahuje ibuprofen ve formě ibuprofen-lysinátu, který se v těle snadno rozkládá, účinná látka se dobře vstřebává do krevního řečiště, a tak se rychle dostane ke zdroji bolesti.</description>
 		<allergens>
 			<allergen>dolor. Nulla</allergen>
 			<allergen>bibendum</allergen>
@@ -72,8 +74,9 @@
 	</medicine>
 	<medicine>
 		<id>7</id>
-		<name>Aenean eget</name>
-		<description>Donec nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla</description>
+		<name>NALGESIN S</name>
+		<description>Léčivá látka přípravku, naproxen ve formě sodné soli mírní bolest, horečku a zánět. Tablety se dobře rozpouštějí, proto nástup analgetického účinku je velmi rychlý. 
+</description>
 		<allergens>
 			<allergen>In</allergen>
 			<allergen>amet risus. Donec</allergen>
@@ -84,8 +87,12 @@
 	</medicine>
 	<medicine>
 		<id>8</id>
-		<name>parturient montes,</name>
-		<description>habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna, malesuada vel, convallis</description>
+		<name>OPHTAL</name>
+		<description>Tento přípravek obsahuje látky mající antiseptický účinek (usmrcují choroboplodné 
+mikroorganismy). Používá se při nepříjemných pocitech v oku, jako je např. pálení, řezání a 
+svědění způsobené zevními vlivy (kouř, prach apod.), při lehčích formách zánětů spojivek, ječném 
+zrnu, zánětech okrajů očních víček, dále k výplachům po poleptání očí a k odstranění cizích tělísek 
+ze spojivkového vaku.</description>
 		<allergens>
 			<allergen>bibendum</allergen>
 		</allergens>
@@ -94,8 +101,8 @@
 	</medicine>
 	<medicine>
 		<id>9</id>
-		<name>sed, facilisis vitae,</name>
-		<description>libero. Proin sed turpis nec mauris blandit mattis. Cras eget nisi dictum augue malesuada malesuada. Integer id magna et ipsum</description>
+		<name>PARALEN 500</name>
+		<description>Tablety Paralen 500 jsou určeny ke snížení horečky a bolesti při chřipce, nachlazení a jiných infekčních onemocněních.</description>
 		<allergens>
 			<allergen>mauris ipsum porta</allergen>
 			<allergen>dolor. Nulla</allergen>
@@ -106,8 +113,9 @@
 	</medicine>
 	<medicine>
 		<id>10</id>
-		<name>nunc nulla vulputate dui,</name>
-		<description>sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo. Praesent luctus. Curabitur</description>
+		<name>TUSSIN</name>
+		<description>Přípravek TUSSIN tlumí dráždění ke kašli. Na rozdíl od přípravků, obsahujících kodein, 
+nepůsobí útlum dechového centra a nevyvolává návyk při dlouhodobém užívání.</description>
 		<allergens>
 		</allergens>
 		<package>20</package>
