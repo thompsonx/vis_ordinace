@@ -86,7 +86,7 @@ namespace ORD.PatientCard.Requests
             new SampleRequestMapper().DeletePatientRequests(p_id, db);
         }
 
-        public List<Request> SelectRequests(string p_id, string type = null)
+        public IList<Request> SelectRequests(string p_id, string type = null)
         {
             switch (type)
             {

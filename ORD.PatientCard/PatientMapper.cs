@@ -209,7 +209,7 @@ namespace ORD.PatientCard
             mapper.DeleteRequest(r);
         }
 
-        public List<Request> SelectRequests(Patient p, string type = null)
+        public IList<Request> SelectRequests(Patient p, string type = null)
         {
             return new RequestMapper().SelectRequests(p.ID, type);
         }
@@ -236,7 +236,7 @@ namespace ORD.PatientCard
             em.Delete(e);
         }
 
-        public List<Examination> SelectExaminations(Patient p)
+        public IList<Examination> SelectExaminations(Patient p)
         {
             return new ExaminationMapper().Select(p.ID);
         }
