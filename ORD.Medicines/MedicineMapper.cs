@@ -1,4 +1,5 @@
-﻿using ORD.Strings;
+﻿using ORD.Repository;
+using ORD.Strings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,13 @@ namespace ORD.Medicines
         }
 
         private Dictionary<int, Medicine> medicines;
+        private IMedicineRepository repository;
 
         private MedicineMapper()
         {
             this.medicines = new Dictionary<int,Medicine>();
+            //this.repository = new MedicineRepository(MedicineRepository.DSOURCE.XML);
+            this.repository = new MedicineRepository(new XmlDataSource());
         }
 
         private void Add(Medicine m)
@@ -35,63 +39,22 @@ namespace ORD.Medicines
         {
             get
             {
-                this.LoadMedicines();
                 return this.medicines.Values.ToList();
             }
         }
 
-        private void LoadMedicines()
+        public IList<Medicine> LoadMedicines()
         {
-            if (this.medicines.Count != 0)
-                return;
-            try
-            {
-                XmlDocument xml = new XmlDocument();
-                xml.Load(Config.Settings["XML_medicines"]);
-                XmlNodeList meds = xml.DocumentElement.SelectNodes("//medicine");
-
-                foreach (XmlNode node in meds)
-                {
-                    int id;
-                    if (!Int32.TryParse(node.ChildNodes[0].InnerText, out id))
-                        throw new ApplicationException(ErrorMessages.Messages["MED_S_xml_id"] + node.ChildNodes[0].InnerText);
-                    string name = node.ChildNodes[1].InnerText;
-                    string description = node.ChildNodes[2].InnerText;
-                    List<string> allergens = new List<string>();
-                    foreach (XmlNode a in node.ChildNodes[3].ChildNodes)
-                    {
-                        allergens.Add(a.InnerText);
-                    }
-                    int package;
-                    if (!Int32.TryParse(node.ChildNodes[4].InnerText, out package))
-                        throw new ApplicationException(ErrorMessages.Messages["MED_S_xml_package"] + node.ChildNodes[4].InnerText);
-                    float price;
-                    if (!Single.TryParse(node.ChildNodes[5].InnerText, out price))
-                        throw new ApplicationException(ErrorMessages.Messages["MED_S_xml_price"] + node.ChildNodes[5].InnerText);
-
-                    Medicine m = new Medicine();
-                    m.Id = id;
-                    m.Name = name;
-                    m.Description = description;
-                    m.Allergens = allergens;
-                    m.PackageSize = package;
-                    m.Price = price;
-                    this.Add(m);
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(ErrorMessages.Messages["MED_S_xml"] + e.Message);
-            }
+            this.medicines = this.repository.LoadAsDict();
+            return this.medicines.Values.ToList();
         }
 
         public Medicine Find(int id)
         {
-            this.LoadMedicines();
             if (this.medicines.ContainsKey(id))
                 return this.medicines[id];
             else
-                return null;
+                return this.repository.Find(id);
         }
     }
 }
